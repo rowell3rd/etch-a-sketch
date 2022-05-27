@@ -70,26 +70,44 @@ randomBtn.addEventListener('click', () => chooseColor('random'))
 
 rstBtn.textContent ='RESET BUTTON'
 blackBtn.textContent ='DEFAULT'
-whiteBtn.textContent ='WHITE'
+whiteBtn.textContent ='ERASER'
 randomBtn.textContent ='RANDOM'
 
 chooseBody.parentNode.insertBefore(buttonContainer,container.nextSibling)
 //SLIDER
 
-let rowNum = 0
-let columnNum = 0
+
 
 const sliderContainer = document.createElement('div')
 const slider = document.createElement('input')
+const selectSlider = document.querySelector('input')
+let currentSize = document.createElement('h2')
+let chooseH2 = document.querySelector('h2')
 
 sliderContainer.appendChild(slider)
 slider.type = 'range'
-slider.min = `1`
-slider.max = `50`
+slider.min = 10
+slider.max = 50
+slider.step = 1
+
+slider.addEventListener('input', () => sliderFunction())
+
+function sliderFunction(){
+    let val = slider.value
+    currentSize.textContent = `${val}`
+    return parseInt(val)
+}
+
+let size = sliderFunction()
+
+sliderContainer.appendChild(currentSize)
 
 
-rowNum = parseInt(slider.value)
-columnNum = parseInt(slider.value)
+// sliderContainer.style['border'] = 'solid red 2px'
+sliderContainer.style['display'] = 'flex'
+sliderContainer.style['align-items'] = 'center'
+sliderContainer.style['justify-content'] = 'center'
+sliderContainer.style['gap'] = '20px'
 
 
 
@@ -125,7 +143,7 @@ styleWhole.style['box-sizing'] = 'border-box'
 chooseBody.appendChild(container)
 const perRow = document.createElement('div')
 
-for(let i = 0; i < rowNum; i++){
+for(let i = 0; i < size; i++){
     const perRow = document.createElement('div')
 
     //ROWS
@@ -134,7 +152,7 @@ for(let i = 0; i < rowNum; i++){
     perRow.style['display'] = 'flex'
 
     //COLUMNS
-    for(let i = 0; i < columnNum; i++){
+    for(let i = 0; i < size; i++){
         const theColumns = document.createElement('div')
         theColumns.style['width'] = '100%'
         theColumns.style['height'] = '100%'
